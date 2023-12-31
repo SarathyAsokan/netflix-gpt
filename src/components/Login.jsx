@@ -1,7 +1,10 @@
 import { useRef, useState } from "react";
-import { Header } from "./Header";
 import { checkValidData } from "../utils/validate";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
 
 export const Login = () => {
@@ -33,6 +36,18 @@ export const Login = () => {
           const user = userCredential.user;
           // ...
           console.log(user);
+          updateProfile(auth.currentUser, {
+            displayName: username.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -41,7 +56,11 @@ export const Login = () => {
           setShowError(errorCode + "-" + errorMessage);
         });
     } else {
-      signInWithEmailAndPassword(auth, email, password)
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
@@ -58,7 +77,6 @@ export const Login = () => {
 
   return (
     <>
-      <Header />
       <div>
         <img
           className="absolute"
