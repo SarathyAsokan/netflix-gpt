@@ -12,7 +12,6 @@ export const RootLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("USEEFFECT CALLED");
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
