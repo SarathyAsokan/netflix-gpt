@@ -21,7 +21,7 @@ export const Header = () => {
   return (
     <div className="absolute w-screen h-20 p-4 bg-gradient-to-b from-black z-20 flex justify-between">
       <img
-        className="w-30 h-15 ml-20"
+        className="w-30 h-15 ml-10"
         src={APP_LOGO}
         alt="logo"
       />
@@ -29,7 +29,7 @@ export const Header = () => {
         <div className="flex">
         <p className="mr-5 pt-2 text-white">Welcome {userDetails.displayName}!</p>
         <button
-          className="h-10 mr-20 px-6 font-semibold rounded-md bg-red-700 text-white"
+          className="h-10 mr-10 px-6 font-semibold rounded-md bg-red-700 text-white"
           onClick={signOutHandler}
         >
           SignOut
