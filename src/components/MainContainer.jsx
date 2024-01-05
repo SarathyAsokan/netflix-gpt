@@ -7,7 +7,7 @@ export const MainContainer = () => {
 
   if (!movies) return;
 
-  const mainMovie = movies[2];
+  const mainMovie = movies[Math.floor(Math.random() * 20)];
 
   const { original_title, overview, id } = mainMovie;
 

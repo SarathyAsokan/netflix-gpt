@@ -1,28 +1,18 @@
-import React, { useEffect } from "react";
-import { TMDB_OPTIONS } from "../utils/constants";
-import { useDispatch } from "react-redux";
-import { addNowPlayingMovies } from "../utils/movieSlice";
+import React from "react";
+import { addNowPlayingMovies, addPopularMovies, addTopRatedMovies, addUpcomingMovies } from "../utils/movieSlice";
 import { MainContainer } from "./MainContainer";
 import { SecondaryContainer } from "./SecondaryContainer";
+import { useFetch } from "../hooks/useFetch";
 
 export const Browse = () => {
-  const dispatch = useDispatch();
-
-  async function getNowPlayingMovies() {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?page=1",
-      TMDB_OPTIONS
-    );
-    const res = await data.json();
-    dispatch(addNowPlayingMovies(res.results));
-  }
-
-  useEffect(() => {
-    getNowPlayingMovies();
-  }, []);
+  
+  useFetch("https://api.themoviedb.org/3/movie/now_playing?page=1", addNowPlayingMovies);
+  useFetch("https://api.themoviedb.org/3/movie/popular?page=1", addPopularMovies);
+  useFetch("https://api.themoviedb.org/3/movie/top_rated?page=1", addTopRatedMovies);
+  useFetch("https://api.themoviedb.org/3/movie/upcoming?page=1", addUpcomingMovies);
 
   return (
-    <div className="p-2 absolute">
+    <div className="absolute">
       <MainContainer />
       <SecondaryContainer />
     </div>
